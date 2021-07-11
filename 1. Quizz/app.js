@@ -25,12 +25,11 @@ form.addEventListener('submit', (e) => {
    for(i=1; i<numberQuestion; i++){
       resultTab.push(document.querySelector(`input[name="q${i}"]:checked`).value)
    }
-   console.log(resultTab)
+
    verification(resultTab)
-
    resultTab=[]
+   countResult(resultVerif)
    resultVerif=[]
-
 })
 
 //Verification results
@@ -40,18 +39,18 @@ let verification = (resultTab) =>{
    for(i=0; i< resultTab.length; i++){
       if(resultTab[i] === response[i]){
          resultVerif.push(true);
-      } else{resultVerif.push(false);}
+      } else{
+         resultVerif.push(false);
+      }
    }
-   countResult(resultVerif)
 }
 
 //Count results
 
-let countResult = (resultVerif) =>{
-   let goodResponses = resultVerif.filter(el => el === true).length
+let countResult = (tableau) =>{
+   let goodResponses = tableau.filter(el => el === true).length
    console.log(goodResponses)
-   // score.innerTexte = `Vous avez obtenu le score de ${goodResponses}/${numberQuestion}`
-   score.innerTexte = "toto"
+   score.innerText = `Vous avez obtenu le score de ${goodResponses}/${(numberQuestion)-1}`
 }
 
 
