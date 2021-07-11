@@ -5,6 +5,7 @@ let questionTab = [];
 let numberQuestion;
 let resultTab = [];
 let resultVerif = [];
+let questionsQuizz = document.querySelectorAll('.question-block')
 let score = document.querySelector('.note');
 
 //Good response
@@ -13,7 +14,7 @@ const response = ['c', 'a', 'b', 'a', 'c']
 
 //Question Number
 
-questionTab.push(document.querySelectorAll('.question-block'))
+questionTab.push(questionsQuizz)
 console.log(questionTab[0].length)
 numberQuestion = (questionTab[0].length)+1
 
@@ -27,9 +28,13 @@ form.addEventListener('submit', (e) => {
    }
 
    verification(resultTab)
+ 
    resultTab=[]
    countResult(resultVerif)
+   console.log(resultVerif)
    resultVerif=[]
+   
+
 })
 
 //Verification results
@@ -43,6 +48,7 @@ let verification = (resultTab) =>{
          resultVerif.push(false);
       }
    }
+   colorFunction(resultVerif)
 }
 
 //Count results
@@ -52,6 +58,31 @@ let countResult = (tableau) =>{
    console.log(goodResponses)
    score.innerText = `Vous avez obtenu le score de ${goodResponses}/${(numberQuestion)-1}`
 }
+
+//Style Color Response
+
+let colorFunction = (tabBool) =>{
+   for(let i=0; i< tabBool.length; i++){
+      if(tabBool[i] === true){
+         questionsQuizz[i].style.background = 'lightgreen';
+      } else{
+         questionsQuizz[i].style.background = '#ffb8b8';
+         questionsQuizz[i].classList.add('echec');
+
+         setTimeout(() => {
+            questionsQuizz[i].classList.remove('echec');
+        }, 500)
+
+      }
+   }
+}
+
+
+questionsQuizz.forEach(item => {
+   item.addEventListener('click', () => {
+       item.style.background = "white";
+   })
+})
 
 
 
